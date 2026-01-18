@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bistro Lumiere - 隠れ家ビストロ</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container header-container">
+            <h1 class="logo">Bistro Lumiere</h1>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact">Access</a></li>
+                </ul>
+            </nav>
+            <button id="theme-toggle" class="theme-btn" aria-label="ダークモード切り替え">
+                <span class="icon">🌙</span>
+            </button>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content fade-in">
+            <h2 class="hero-title">Taste the Season,<br>Feel the Magic.</h2>
+            <p class="hero-subtitle">旬の食材と匠の技が織りなす、至福のひとときを。</p>
+            <a href="#contact" class="btn btn-primary">ご予約はこちら</a>
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+    <section class="section about" id="about">
+        <div class="container">
+            <h3 class="section-title">Our Story</h3>
+            <div class="about-content grid-2">
+                <div class="about-text fade-up">
+                    <h4>「記憶に残る一皿」を求めて。</h4>
+                    <p>街の喧騒を離れた路地裏に佇む、大人のための隠れ家ビストロ「Bistro Lumiere」。</p>
+                    <p>私たちは「地産地消」と「素材の対話」を大切にしています。毎朝シェフ自ら市場で厳選した新鮮な野菜と、信頼できる生産者から仕入れた肉や魚。それらの魅力を最大限に引き出すのは、伝統的なフレンチの技法と、自由な発想です。</p>
+                    <p>特別な日のディナーにも、仕事帰りの一杯にも。心温まる料理とサービスでお待ちしております。</p>
+                </div>
+                <div class="about-img fade-up delay-200">
+                    <div class="img-placeholder">Chef / Kitchen Image</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section menu" id="menu">
+        <div class="container">
+            <h3 class="section-title">Signature Menu</h3>
+            <div class="menu-grid">
+                <div class="menu-card fade-up">
+                    <div class="menu-icon">🥩</div>
+                    <h4>Main Dish</h4>
+                    <p>黒毛和牛のロースト 赤ワインソース</p>
+                    <span class="price">¥3,800</span>
+                    <p class="menu-desc">低温でじっくり火を通し、驚くほど柔らかく仕上げました。</p>
+                </div>
+                <div class="menu-card fade-up delay-100">
+                    <div class="menu-icon">🥗</div>
+                    <h4>Appetizer</h4>
+                    <p>季節野菜のテリーヌ</p>
+                    <span class="price">¥1,200</span>
+                    <p class="menu-desc">色とりどりの旬野菜を美しい層に仕立てた、目でも楽しめる一品。</p>
+                </div>
+                <div class="menu-card fade-up delay-200">
+                    <div class="menu-icon">🍷</div>
+                    <h4>Wine</h4>
+                    <p>ソムリエ厳選ペアリング</p>
+                    <span class="price">¥2,500~</span>
+                    <p class="menu-desc">お料理に合わせた最適なワインをご提案いたします。</p>
+                </div>
+                <div class="menu-card fade-up delay-300">
+                    <div class="menu-icon">🍝</div>
+                    <h4>Pasta</h4>
+                    <p>濃厚ウニのクリームパスタ</p>
+                    <span class="price">¥1,800</span>
+                    <p class="menu-desc">北海道産生ウニを贅沢に使用した、リピート率No.1の人気メニュー。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section gallery" id="gallery">
+        <div class="container">
+            <h3 class="section-title">Gallery</h3>
+            <div class="gallery-grid">
+                <div class="gallery-item fade-up">
+                    <div class="img-placeholder">Interior</div>
+                    <div class="gallery-overlay">
+                        <p>落ち着いた店内</p>
+                    </div>
+                </div>
+                <div class="gallery-item fade-up">
+                    <div class="img-placeholder">Dish 01</div>
+                    <div class="gallery-overlay">
+                        <p>季節のコース</p>
+                    </div>
+                </div>
+                <div class="gallery-item fade-up">
+                    <div class="img-placeholder">Wine</div>
+                    <div class="gallery-overlay">
+                        <p>厳選ワイン</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h3 class="section-title">Access & Reserve</h3>
+            <div class="contact-wrapper grid-2">
+                <div class="contact-info fade-up">
+                    <h4>Bistro Lumiere</h4>
+                    <p>〒100-0000<br>東京都渋谷区神南 1-2-3</p>
+                    <p>Tel: 03-1234-5678</p>
+                    <p>Lunch: 11:30 - 14:30<br>Dinner: 18:00 - 23:00</p>
+                    <p>Close: Wednesday</p>
+                    <div class="sns-links">
+                        <a href="#">Instagram</a>
+                        <a href="#">X (Twitter)</a>
+                    </div>
+                </div>
+                <div class="contact-form fade-up delay-200">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">お名前</label>
+                            <input type="text" id="name" placeholder="山田 太郎">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">メールアドレス</label>
+                            <input type="email" id="email" placeholder="email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">ご要望・お問い合わせ</label>
+                            <textarea id="message" rows="4" placeholder="ご予約希望日時やアレルギー等"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">送信する</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 Bistro Lumiere. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
