@@ -1,6 +1,6 @@
 ---
-name: x-post-daily-6am
-description: 毎朝6時：トッティーX投稿チーム起動（三層リサーチ→生成→採点まで全自動、Drive保存・図解は承認後）
+name: x-post-daily-4am
+description: 毎朝4時：トッティーX投稿チーム起動（三層リサーチ→生成→採点まで全自動、Drive保存・図解は承認後）
 ---
 
 あなたはジェット_リモートです。
