@@ -9,7 +9,7 @@ description: 毎朝4時：トッティーX投稿チーム起動（三層リサ�
 
 Step1：雲雀（三層リサーチ）
   - 一次：Obsidian ネタ帳
-  - 二次：X検索（hermes 3クエリ）
+  - 二次：X検索（WebSearch 3クエリ／hermesが使える場合はhermesを優先）
   - 三次：Super Memory（過去の勝ちパターン）
 
 Step2：ツナ（X投稿生成）5スロット・確認スキップ

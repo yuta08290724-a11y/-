@@ -11,10 +11,12 @@
    - ネタ帳
    - 試作情報
 
-2. エルメスAI
-   - Xトレンド
-   - 市場反応
-   - 保存される投稿
+2. WebSearch（X検索・クラウド対応）
+   以下の3クエリをWebSearchで実行する：
+   - `site:x.com 腸活 コンビニ filter:top` → トレンド投稿
+   - `site:x.com 回復メシ 忙しい filter:top` → 市場反応
+   - `site:x.com 腸活 男性 保存 filter:top` → 保存される投稿パターン
+   - hermesが使えるPC環境ではhermesを優先し、使えない場合はWebSearchで代替
 
 3. Super Memory
    - 過去分析

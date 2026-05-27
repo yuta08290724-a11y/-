@@ -8,6 +8,7 @@
 
 ### Step1：雲雀（リサーチ）を自動実行
 `agents/雲雀.md` の手順に従い、三層リサーチ（Obsidian・X・Super Memory）を実行する。
+- X検索はWebSearchで代替可能（hermesが使えない環境でも動作する）
 - エラー時はスキップしてStep2へ進む
 
 ### Step2：ツナ（X投稿生成）を自動実行
