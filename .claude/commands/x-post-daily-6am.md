@@ -12,11 +12,17 @@
 
 以下の3層を**並行**して実行してください：
 
-**一次リサーチ（Notionネタ帳）**
-`mcp__8ab79438-3de8-4160-bc66-751670d8970f__notion-search` で以下を検索：
-- query: "X投稿 ネタ帳 トッティー シェフ 料理"
-- query: "X投稿 ネタ アイデア 料理 腸活 コンビニ 勝ちパターン"
-- 取得した結果のページIDを `notion-fetch` で詳細取得
+**一次リサーチ（Obsidianネタ帳）**
+`mcp__obsidian__search` で以下を検索：
+- query: "X投稿 ネタ 料理 シェフ"
+- query: "腸活 コンビニ アイデア"
+
+ヒットしたノートを `mcp__obsidian__get_file_contents` で全文取得。
+Obsidian MCPが未接続の場合は Bash で `find` + `grep` によるvault直読みにフォールバック：
+```
+find "${OBSIDIAN_VAULT_PATH}" -name "*.md" | xargs grep -l "X投稿\|ネタ\|料理\|シェフ" | head -10
+```
+（OBSIDIAN_VAULT_PATHは環境変数から取得。未設定なら ~/ObsidianVault を試す）
 
 **二次リサーチ（X検索 3クエリ）**
 `mcp__91c485b8-283c-4e0b-a16f-bf2645fbbef4__scrape_social` で以下を並行検索：
@@ -152,7 +158,7 @@ Step 4（Drive保存）・Step 5（図解生成）を実行してよいですか
 
 ## エラー時の対応
 
-- Notionが空の場合：二次・三次のリサーチのみで続行
+- Obsidianが空・未接続の場合：Bashフォールバックを試み、それでも取得できなければ二次・三次のリサーチのみで続行
 - X検索が0件の場合：WebSearchで「料理 シェフ バズ 2026 X Twitter」を検索して代替
 - Drive保存失敗の場合：ユーザーに通知してスキップ
 - 画像生成失敗の場合：HTMLベースの代替プレビューを表示
