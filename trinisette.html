@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trinisette Global Corporation — AI Agent Overview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #06080f;
+      --bg2: #0d1120;
+      --card: #111827;
+      --border: #1f2d45;
+      --accent: #4f46e5;
+      --accent2: #7c3aed;
+      --sky: #0ea5e9;
+      --pink: #ec4899;
+      --text: #f0f4ff;
+      --muted: #64748b;
+      --muted2: #94a3b8;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(79,70,229,.25), transparent),
+        radial-gradient(ellipse 40% 40% at 80% 60%, rgba(14,165,233,.12), transparent);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: .25;
+      pointer-events: none;
+      mask-image: radial-gradient(ellipse 80% 80% at center, black, transparent);
+    }
+    .logo-wrap {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+    .logo-mark {
+      width: 88px;
+      height: 88px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: -3px;
+      margin: 0 auto;
+      box-shadow: 0 0 0 12px rgba(79,70,229,.08), 0 0 40px rgba(79,70,229,.35);
+    }
+    .hero-eyebrow {
+      font-size: .75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .hero-title {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 900;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #fff 30%, var(--sky) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1.25rem;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted2);
+      max-width: 620px;
+      margin: 0 auto 2.5rem;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      justify-content: center;
+    }
+    .pill {
+      padding: .45rem 1.2rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: .8rem;
+      color: var(--muted2);
+      background: rgba(255,255,255,.02);
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section {
+      padding: 6rem 1.5rem;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .section-label {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: .7rem;
+      color: var(--sky);
+      margin-bottom: .75rem;
+      font-weight: 700;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+    .section-desc {
+      color: var(--muted2);
+      max-width: 540px;
+      font-size: .95rem;
+    }
+
+    /* ── STATS ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.25rem;
+      margin-top: 3.5rem;
+    }
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 2.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--sky), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .stat-label {
+      color: var(--muted);
+      font-size: .8rem;
+      margin-top: .5rem;
+    }
+
+    /* ── ORG CHART ── */
+    .org-wrap {
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+    /* Top node */
+    .org-top {
+      background: linear-gradient(135deg, rgba(79,70,229,.18), rgba(124,58,237,.18));
+      border: 1px solid rgba(79,70,229,.6);
+      border-radius: 18px;
+      padding: 1.25rem 2.5rem;
+      text-align: center;
+      min-width: 260px;
+      position: relative;
+    }
+    .org-top-icon { font-size: 1.8rem; margin-bottom: .5rem; }
+    .org-top-name { font-size: 1.1rem; font-weight: 700; }
+    .org-top-en { font-size: .72rem; color: var(--muted2); letter-spacing: 2px; text-transform: uppercase; }
+
+    /* Connector */
+    .org-line-v {
+      width: 2px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(79,70,229,.8), var(--border));
+    }
+    .org-branch-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      width: 100%;
+      max-width: 960px;
+    }
+    .org-branch-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+    .org-branch-col .org-line-v {
+      background: linear-gradient(to bottom, var(--border), var(--border));
+    }
+    .org-h-line {
+      height: 2px;
+      background: var(--border);
+      flex: 1;
+      margin-top: 0;
+      align-self: flex-start;
+      margin-top: 0px;
+    }
+    /* The horizontal connector piece */
+    .org-h-wrap {
+      display: flex;
+      width: 100%;
+      max-width: 960px;
+    }
+    .org-h-seg {
+      height: 2px;
+      background: var(--border);
+      flex: 1;
+    }
+    .org-h-center {
+      width: 2px;
+      height: 2px;
+      background: var(--border);
+    }
+
+    /* Child nodes */
+    .org-children {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 960px;
+      margin-top: 0;
+    }
+    .org-child {
+      border-radius: 16px;
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+      border: 1px solid var(--border);
+      background: var(--card);
+      position: relative;
+      overflow: hidden;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .org-child:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,.35); }
+    .org-child::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 16px 16px 0 0;
+    }
+    .org-child.s::after { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+    .org-child.c::after { background: linear-gradient(90deg, var(--sky), #06b6d4); }
+    .org-child.d::after { background: linear-gradient(90deg, var(--pink), #f43f5e); }
+    .org-child-icon { font-size: 1.6rem; margin-bottom: .5rem; }
+    .org-child-name { font-size: 1rem; font-weight: 700; margin-bottom: .2rem; }
+    .org-child-en { font-size: .68rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+
+    /* Vertical lines above children */
+    .org-vlines {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 960px;
+    }
+    .org-vlines div {
+      display: flex;
+      justify-content: center;
+    }
+    .org-vlines div span {
+      display: block;
+      width: 2px;
+      height: 36px;
+      background: var(--border);
+    }
+
+    /* ── AGENT DETAIL CARDS ── */
+    .agent-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+    .agent-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .agent-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 64px rgba(0,0,0,.4);
+    }
+    .agent-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .agent-card.s::before { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+    .agent-card.c::before { background: linear-gradient(90deg, var(--sky), #06b6d4); }
+    .agent-card.d::before { background: linear-gradient(90deg, var(--pink), #f43f5e); }
+    .agent-card-glow {
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: .07;
+    }
+    .s .agent-card-glow { background: var(--accent); }
+    .c .agent-card-glow { background: var(--sky); }
+    .d .agent-card-glow { background: var(--pink); }
+    .agent-icon-wrap {
+      width: 56px; height: 56px;
+      border-radius: 15px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+    }
+    .s .agent-icon-wrap { background: rgba(79,70,229,.2); }
+    .c .agent-icon-wrap { background: rgba(14,165,233,.2); }
+    .d .agent-icon-wrap { background: rgba(236,72,153,.2); }
+    .agent-name { font-size: 1.25rem; font-weight: 800; }
+    .agent-en {
+      font-size: .7rem; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--muted);
+      margin-top: .2rem;
+    }
+    .agent-desc { font-size: .88rem; color: var(--muted2); }
+    .agent-tasks { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    .agent-tasks li {
+      display: flex; align-items: flex-start; gap: .7rem;
+      font-size: .88rem;
+    }
+    .task-dot {
+      flex-shrink: 0;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin-top: 7px;
+    }
+    .s .task-dot { background: var(--accent); }
+    .c .task-dot { background: var(--sky); }
+    .d .task-dot { background: var(--pink); }
+    .agent-tools {
+      display: flex; flex-wrap: wrap; gap: .5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .tool-chip {
+      padding: .3rem .85rem;
+      border-radius: 999px;
+      font-size: .72rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+    }
+    .s .tool-chip { border-color: rgba(79,70,229,.4); color: #a5b4fc; }
+    .c .tool-chip { border-color: rgba(14,165,233,.4); color: #7dd3fc; }
+    .d .tool-chip { border-color: rgba(236,72,153,.4); color: #f9a8d4; }
+
+    /* ── WORKFLOW ── */
+    .flow-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-top: 4rem;
+    }
+    .flow-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 140px;
+    }
+    .flow-circle {
+      width: 68px; height: 68px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      border: 2px solid var(--border);
+      background: var(--card);
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .flow-step:nth-child(1) .flow-circle { border-color: rgba(79,70,229,.6); background: rgba(79,70,229,.1); }
+    .flow-step:nth-child(3) .flow-circle { border-color: rgba(14,165,233,.6); background: rgba(14,165,233,.1); }
+    .flow-step:nth-child(5) .flow-circle { border-color: rgba(236,72,153,.6); background: rgba(236,72,153,.1); }
+    .flow-step:nth-child(7) .flow-circle { border-color: rgba(16,185,129,.6); background: rgba(16,185,129,.1); }
+    .flow-label { font-size: .85rem; font-weight: 700; }
+    .flow-sub { font-size: .72rem; color: var(--muted); margin-top: .25rem; }
+    .flow-arrow {
+      font-size: 1.4rem;
+      color: var(--border);
+      padding: 0 .75rem;
+      padding-bottom: 2.5rem;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      height: 1px;
+      background: var(--border);
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      color: var(--muted);
+      font-size: .8rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 700px) {
+      .org-children { grid-template-columns: 1fr; }
+      .org-vlines { grid-template-columns: 1fr; }
+      .org-vlines div:not(:first-child) { display: none; }
+      .org-h-wrap { display: none; }
+      .flow-arrow { transform: rotate(90deg); padding: .75rem 0; }
+      .flow-wrap { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+
+  <div class="logo-wrap">
+    <div class="logo-mark">TG</div>
+  </div>
+
+  <p class="hero-eyebrow">AI-Powered Enterprise</p>
+  <h1 class="hero-title">Trinisette<br>Global Corporation</h1>
+  <p class="hero-sub">
+    戦略・コンテンツ・ビジュアルの三位一体で動く次世代 AI エージェント企業。<br>
+    人間とAIが協働し、創造の限界を超えていく。
+  </p>
+  <div class="pill-row">
+    <span class="pill">AI-Native</span>
+    <span class="pill">3 Core Agents</span>
+    <span class="pill">Global Scale</span>
+    <span class="pill">Full-Stack Creative</span>
+  </div>
+</section>
+
+<!-- ════════════════════ OVERVIEW ════════════════════ -->
+<div class="section">
+  <p class="section-label">Company Overview</p>
+  <h2 class="section-title">三位一体の AI 企業</h2>
+  <p class="section-desc">
+    Trinisette Global Corporation は「三つが一つになる」という理念のもと、
+    戦略・コンテンツ・デザインの 3 エージェントが連携して動く AI ドリブンな創造企業です。
+  </p>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-num">3</div>
+      <div class="stat-label">コア AI エージェント</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">24/7</div>
+      <div class="stat-label">ノンストップ稼働</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">AI ネイティブ組織</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">スケーラビリティ</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ════════════════════ ORG CHART ════════════════════ -->
+<div class="section">
+  <p class="section-label">Organization</p>
+  <h2 class="section-title">エージェント構造図</h2>
+  <p class="section-desc">
+    CEO エージェントがビジョンを設定し、3 つの専門エージェントが連携してアウトプットを生み出します。
+  </p>
+
+  <div class="org-wrap">
+
+    <!-- CEO node -->
+    <div class="org-top">
+      <div class="org-top-icon">🏛️</div>
+      <div class="org-top-name">CEO Agent</div>
+      <div class="org-top-en">Orchestrator · Vision · Direction</div>
+    </div>
+
+    <!-- Vertical line down from CEO -->
+    <div class="org-line-v"></div>
+
+    <!-- Horizontal bar across all three -->
+    <div class="org-h-wrap" style="max-width:760px;">
+      <div class="org-h-seg"></div>
+      <div style="width:2px;background:var(--border);"></div>
+      <div class="org-h-seg"></div>
+    </div>
+
+    <!-- Three vertical drops -->
+    <div class="org-vlines" style="max-width:760px;">
+      <div><span></span></div>
+      <div><span></span></div>
+      <div><span></span></div>
+    </div>
+
+    <!-- Three child nodes -->
+    <div class="org-children" style="max-width:760px;">
+      <div class="org-child s">
+        <div class="org-child-icon">🧭</div>
+        <div class="org-child-name">戦略・企画</div>
+        <div class="org-child-en">Strategy Agent</div>
+      </div>
+      <div class="org-child c">
+        <div class="org-child-icon">✍️</div>
+        <div class="org-child-name">コンテンツ制作</div>
+        <div class="org-child-en">Content Agent</div>
+      </div>
+      <div class="org-child d">
+        <div class="org-child-icon">🎨</div>
+        <div class="org-child-name">ビジュアル・デザイン</div>
+        <div class="org-child-en">Design Agent</div>
+      </div>
+    </div>
+
+  </div><!-- /org-wrap -->
+</div>
+
+<hr class="divider" />
+
+<!-- ════════════════════ AGENT DETAIL ════════════════════ -->
+<div class="section">
+  <p class="section-label">Agent Roles</p>
+  <h2 class="section-title">各エージェントの役割</h2>
+  <p class="section-desc">それぞれのエージェントが専門領域を担い、有機的に連携して成果を最大化します。</p>
+
+  <div class="agent-grid">
+
+    <!-- Strategy -->
+    <div class="agent-card s">
+      <div class="agent-card-glow"></div>
+      <div class="agent-icon-wrap">🧭</div>
+      <div>
+        <div class="agent-name">戦略・企画エージェント</div>
+        <div class="agent-en">Strategy Agent</div>
+      </div>
+      <p class="agent-desc">
+        組織全体のビジョンを定義し、プロジェクトを設計・管理する司令塔。
+        データと直感の両面から意思決定を行い、他の2エージェントに指針を与えます。
+      </p>
+      <ul class="agent-tasks">
+        <li><span class="task-dot"></span>ビジョン・ミッション・KPI の設定</li>
+        <li><span class="task-dot"></span>プロジェクトロードマップの策定</li>
+        <li><span class="task-dot"></span>市場調査・競合分析・トレンド把握</li>
+        <li><span class="task-dot"></span>他エージェントへのタスク分配と優先度管理</li>
+        <li><span class="task-dot"></span>成果物の品質評価とフィードバックループ</li>
+      </ul>
+      <div class="agent-tools">
+        <span class="tool-chip">Notion</span>
+        <span class="tool-chip">Web Search</span>
+        <span class="tool-chip">Analytics</span>
+        <span class="tool-chip">Claude AI</span>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="agent-card c">
+      <div class="agent-card-glow"></div>
+      <div class="agent-icon-wrap">✍️</div>
+      <div>
+        <div class="agent-name">コンテンツ制作エージェント</div>
+        <div class="agent-en">Content Agent</div>
+      </div>
+      <p class="agent-desc">
+        戦略に基づいてテキスト・音声・動画スクリプトを生成する言語の専門家。
+        ターゲットに刺さるメッセージを高速・高品質で量産します。
+      </p>
+      <ul class="agent-tasks">
+        <li><span class="task-dot"></span>SNS 投稿文・キャプション・ハッシュタグ生成</li>
+        <li><span class="task-dot"></span>ブログ記事・メールマガジン執筆</li>
+        <li><span class="task-dot"></span>動画・ショートムービーの台本作成</li>
+        <li><span class="task-dot"></span>ナレーション音声の生成（TTS）</li>
+        <li><span class="task-dot"></span>多言語翻訳・ローカライズ対応</li>
+      </ul>
+      <div class="agent-tools">
+        <span class="tool-chip">Claude AI</span>
+        <span class="tool-chip">Speech Gen</span>
+        <span class="tool-chip">Transcription</span>
+        <span class="tool-chip">Gmail</span>
+      </div>
+    </div>
+
+    <!-- Design -->
+    <div class="agent-card d">
+      <div class="agent-card-glow"></div>
+      <div class="agent-icon-wrap">🎨</div>
+      <div>
+        <div class="agent-name">ビジュアル・デザインエージェント</div>
+        <div class="agent-en">Design Agent</div>
+      </div>
+      <p class="agent-desc">
+        画像・映像・グラフィックのすべてを担うクリエイティブの核心。
+        AIツールを駆使してブランドの世界観を視覚言語へと昇華させます。
+      </p>
+      <ul class="agent-tasks">
+        <li><span class="task-dot"></span>画像生成・サムネイル・バナー制作</li>
+        <li><span class="task-dot"></span>AI 動画生成・映像編集</li>
+        <li><span class="task-dot"></span>ブランドキット・カラースキーム管理</li>
+        <li><span class="task-dot"></span>ロゴ・アイコン・UI デザイン</li>
+        <li><span class="task-dot"></span>SNS 向けビジュアルテンプレート最適化</li>
+      </ul>
+      <div class="agent-tools">
+        <span class="tool-chip">Adobe Firefly</span>
+        <span class="tool-chip">Canva</span>
+        <span class="tool-chip">Pika / Sora</span>
+        <span class="tool-chip">RunwayML</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- ════════════════════ WORKFLOW ════════════════════ -->
+<div class="section">
+  <p class="section-label">Workflow</p>
+  <h2 class="section-title">エージェント連携フロー</h2>
+  <p class="section-desc">
+    3 エージェントはシーケンシャル＋並行処理で連携し、最速でアウトプットを届けます。
+  </p>
+
+  <div class="flow-wrap">
+
+    <div class="flow-step">
+      <div class="flow-circle">🧭</div>
+      <div class="flow-label">戦略策定</div>
+      <div class="flow-sub">Strategy Agent</div>
+    </div>
+
+    <div class="flow-arrow">→</div>
+
+    <div class="flow-step">
+      <div class="flow-circle">✍️</div>
+      <div class="flow-label">コンテンツ生成</div>
+      <div class="flow-sub">Content Agent</div>
+    </div>
+
+    <div class="flow-arrow">→</div>
+
+    <div class="flow-step">
+      <div class="flow-circle">🎨</div>
+      <div class="flow-label">ビジュアル制作</div>
+      <div class="flow-sub">Design Agent</div>
+    </div>
+
+    <div class="flow-arrow">→</div>
+
+    <div class="flow-step">
+      <div class="flow-circle">🚀</div>
+      <div class="flow-label">配信・公開</div>
+      <div class="flow-sub">Delivery</div>
+    </div>
+
+  </div>
+
+  <!-- SVG Timeline connector decoration -->
+  <svg viewBox="0 0 900 80" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:900px;display:block;margin:3rem auto 0;opacity:.35;" aria-hidden="true">
+    <defs>
+      <linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#4f46e5"/>
+        <stop offset="33%" stop-color="#0ea5e9"/>
+        <stop offset="66%" stop-color="#ec4899"/>
+        <stop offset="100%" stop-color="#10b981"/>
+      </linearGradient>
+    </defs>
+    <path d="M50,40 Q225,10 450,40 Q675,70 850,40" stroke="url(#lg)" stroke-width="2" fill="none" stroke-dasharray="8 4"/>
+    <circle cx="50"  cy="40" r="6" fill="#4f46e5"/>
+    <circle cx="317" cy="28" r="6" fill="#0ea5e9"/>
+    <circle cx="583" cy="52" r="6" fill="#ec4899"/>
+    <circle cx="850" cy="40" r="6" fill="#10b981"/>
+  </svg>
+</div>
+
+<!-- ════════════════════ FOOTER ════════════════════ -->
+<footer>
+  <p>&copy; 2026 Trinisette Global Corporation. All rights reserved.</p>
+  <p style="margin-top:.4rem;">Powered by AI Agents · Strategy · Content · Design</p>
+</footer>
+
+</body>
+</html>
