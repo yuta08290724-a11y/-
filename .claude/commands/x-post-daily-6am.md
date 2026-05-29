@@ -13,16 +13,41 @@
 以下の3層を**並行**して実行してください：
 
 **一次リサーチ（Obsidianネタ帳）**
-`mcp__obsidian__search` で以下を検索：
+
+Vault path: `C:\Users\Admin\iCloudDrive\Obsidian\mybrain\`
+
+**Step 1-A：Obsidian MCP接続時**
+`mcp__obsidian__search` で以下を並行検索：
 - query: "X投稿 ネタ 料理 シェフ"
 - query: "腸活 コンビニ アイデア"
+- query: "バズ 勝ちパターン 投稿"
 
 ヒットしたノートを `mcp__obsidian__get_file_contents` で全文取得。
-Obsidian MCPが未接続の場合は Bash で `find` + `grep` によるvault直読みにフォールバック：
+
+**Step 1-B：Obsidian MCP未接続時（Bashフォールバック）**
+Windows pathをWSLパスに変換して検索：
+```bash
+VAULT="/mnt/c/Users/Admin/iCloudDrive/Obsidian/mybrain"
+find "$VAULT" -name "*.md" | xargs grep -l "X投稿\|ネタ\|料理\|シェフ\|腸活\|バズ" 2>/dev/null | head -10
 ```
-find "${OBSIDIAN_VAULT_PATH}" -name "*.md" | xargs grep -l "X投稿\|ネタ\|料理\|シェフ" | head -10
+ヒットしたファイルを `Read` ツールで取得。
+
+**Step 1-C：Obsidian→SuperMemory同期（毎回実行）**
+取得したノートの内容から以下の情報を抽出し、`mcp__a55b48d7-98ec-42cc-a0eb-c277bba6036c__memory` で保存：
+
+保存すべき情報の優先順位：
+1. **バズった投稿・勝ちパターン**（具体的な文体・構成・数字）
+2. **新しいネタ・キーワード**（前回と差分があるもの）
+3. **ターゲットの悩み・インサイト**（発見した新しい視点）
+4. **使えるフレーズ・フック文**（冒頭1行として使える表現）
+
+保存形式：
 ```
-（OBSIDIAN_VAULT_PATHは環境変数から取得。未設定なら ~/ObsidianVault を試す）
+[Obsidian同期 {YYYY-MM-DD}] {カテゴリ}: {内容}
+例）[Obsidian同期 2026-05-29] 勝ちパターン: 「〜やで」で終わる逆張り断言型が高反応
+```
+
+※重複・古い情報は保存しない。前回との差分のみをSupermemoryに追加する。
 
 **二次リサーチ（X検索 3クエリ）**
 `mcp__91c485b8-283c-4e0b-a16f-bf2645fbbef4__scrape_social` で以下を並行検索：
