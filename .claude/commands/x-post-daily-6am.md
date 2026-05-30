@@ -191,6 +191,21 @@ Drive「01_回復メシ」フォルダ内の該当カテゴリフォルダに保
 
 **GPTイメージ2.0用プロンプトも併せて出力すること。**
 
+**⚠️ 著作権・商標ルール（必ず遵守）：**
+- 実在する企業ロゴ・ブランドロゴ 禁止
+- 実在する店舗看板（セブン・ローソン・ファミマ等）禁止
+- 実在する商品パッケージ（明治・森永・カゴメ等）禁止
+- コンビニ風の汎用デザインのみ使用
+- 汎用・架空の商品パッケージのみ使用
+
+プロンプトには必ず以下を末尾に追記：
+```
+IMPORTANT: No real brand logos, no real store signs (7-Eleven, 
+Lawson, FamilyMart, etc.), no real product packaging. 
+Use only generic convenience store-style designs and 
+fictional product packaging throughout.
+```
+
 ---
 
 ## エラー時の対応
