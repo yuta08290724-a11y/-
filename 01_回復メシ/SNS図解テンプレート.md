@@ -1,128 +1,92 @@
 # 回復メシ専用 SNS図解テンプレート
-> GPT Image 2.0 カルーセルプロンプト生成ガイド
+> GPT Image 2.0 図解プロンプト生成ガイド
 > 毎回このテンプレートを参照して5投稿分のプロンプトを出力する
 
 ---
 
 ## 全体構成
 
-- **形式**：4枚カルーセル × 5投稿 = 計20枚
-- **サイズ**：1080×1080px
+- **形式**：2×2グリッド1枚画像 × 5投稿 = 計5枚
+- **サイズ**：2160×2160px（4パネルを2×2で配置）
 - **対象**：30〜40代の忙しい男性
 - **世界観**：「忙しい男の回復メシ」
 - **出力目標**：「これ明日やろう」と思わせる図解
 
 ---
 
-## 枚数別プロンプト構造
-
-### 1枚目【問題提起】
+## グリッドレイアウト
 
 ```
-Japanese SNS carousel image 1/4, 1080x1080px, dark background (#1a1a1a or black).
+┌─────────────────┬─────────────────┐
+│  ① 問題提起     │  ② 科学の現実   │
+│  黒背景×黄文字  │  白背景×フロー図│
+├─────────────────┼─────────────────┤
+│  ③ 実践方法     │  ④ 結論・愛の鞭 │
+│  黒背景×STEP    │  黒背景×強MSG  │
+└─────────────────┴─────────────────┘
+各パネル 1080×1080px → 合計 2160×2160px
+```
 
-LAYOUT:
-- Top: short benefit headline in white, small font
-- Center-left: LARGE bold Japanese main headline, yellow (#FFD600) or white, ultra-heavy weight
-- Left: symptom checklist with checkmarks (✔), white text, 4 items
-- Bottom: solution preview text in orange (#FF6B00), bold
+---
 
-STYLE: High contrast, masculine, SNS-optimized for mobile. No cute elements. No minimal design.
-Heavy typography, urgent tone, crisis-driven.
+## プロンプト構造（1投稿 = 1プロンプト）
 
-CONTENT:
+```
+Create a single 2160x2160px image divided into a 2x2 grid of 4 panels,
+each panel 1080x1080px. Japanese SNS infographic style for busy men aged 30-40.
+Theme: 「忙しい男の回復メシ」
+
+--- PANEL TOP-LEFT: 問題提起 ---
+Background: dark (#1a1a1a). Layout: top = short benefit headline (white, small).
+Center-left: LARGE ultra-bold Japanese main headline in yellow (#FFD600).
+Left: symptom checklist ✔ ×4 items in white. Bottom: solution preview in orange (#FF6B00).
+Content:
 - Top: {{短いベネフィット}}
-- Headline: {{大見出し}}（2〜3行、極太）
+- Headline: {{大見出し（2〜3行）}}
 - Checklist: ✔ {{症状1}} / ✔ {{症状2}} / ✔ {{症状3}} / ✔ {{症状4}}
-- Bottom: {{解決策の予告テキスト}}
+- Bottom: → {{解決策の予告}}
 
-IMPORTANT: No real brand logos, no real store signs (7-Eleven, Lawson, FamilyMart, etc.),
-no real product packaging. Use only generic convenience store-style designs
-and fictional product packaging throughout.
-```
+--- PANEL TOP-RIGHT: 科学の現実 ---
+Background: white (#ffffff). Layout: top = slide title in orange.
+Center: vertical arrow flow diagram with rounded rect nodes and ↓ arrows.
+Right side: supplementary explanation in small dark gray.
+Food node: orange border. Mechanism nodes: gray border. Result node: green border.
+Content:
+- Flow: {{食材（¥価格）}} ↓ {{仕組み1}} ↓ {{仕組み2}} ↓ {{最終効果}}
+- Right note: {{補足解説}}
 
----
-
-### 2枚目【科学の現実】
-
-```
-Japanese SNS carousel image 2/4, 1080x1080px, white (#ffffff) background.
-
-LAYOUT:
-- Top: slide title in orange, small
-- Center: vertical arrow flow diagram showing cause → mechanism → result
-  Each node is a rounded rectangle with label + main text
-  Arrows (↓) between nodes in gray
-- Right side: supplementary explanation text in small font, dark gray
-- Food/ingredient nodes: orange border
-- Mechanism nodes: gray border
-- Result node: green border (#4CAF50)
-
-STYLE: Clean scientific diagram, authoritative, data-driven. Arrow-heavy.
-Not cute. Not minimal. Information-dense but scannable.
-
-CONTENT:
-- Flow: {{食材1}}（¥{{価格}}） → {{仕組み1}} → {{仕組み2}} → {{最終効果}}
-- Right side note: {{補足解説（腸・体・メカニズム）}}
-
-IMPORTANT: No real brand logos, no real store signs (7-Eleven, Lawson, FamilyMart, etc.),
-no real product packaging. Use only generic convenience store-style designs
-and fictional product packaging throughout.
-```
-
----
-
-### 3枚目【実践方法】
-
-```
-Japanese SNS carousel image 3/4, 1080x1080px, dark background (#111111).
-
-LAYOUT:
-- Top: slide title in yellow (#FFD600), small
-- Center: 3 STEP cards stacked vertically
-  Each card: yellow circle step number + action text + detail text + price badge
-  Cards have dark gray (#1e1e1e) background, rounded corners
-- Bottom bar: total price / zero cooking time / days to feel results
-  Yellow background, black text, bold
-
-STYLE: Convenience store energy, practical, price-prominent.
-Numbers large. Action-oriented. No abstract concepts.
-
-CONTENT:
+--- PANEL BOTTOM-LEFT: 実践方法 ---
+Background: dark (#111111). Layout: top = yellow slide title.
+Center: 3 STEP cards (yellow circle number + action + detail + price badge, dark gray bg).
+Bottom bar: yellow background, black text, bold stats.
+Content:
 - STEP 1: {{商品名}} ¥{{価格}} → {{効果}}
 - STEP 2: {{商品名}} ¥{{価格}} → {{効果}}
 - STEP 3: {{商品名}} ¥{{価格}} → {{効果}}
 - Bottom bar: 合計¥{{合計}} / 調理ゼロ / 最短{{N}}日で体感
 
-IMPORTANT: No real brand logos, no real store signs (7-Eleven, Lawson, FamilyMart, etc.),
-no real product packaging. Use only generic convenience store-style designs
-and fictional product packaging throughout.
-```
-
----
-
-### 4枚目【結論・愛の鞭】
-
-```
-Japanese SNS carousel image 4/4, 1080x1080px, black (#000000) background.
-
-LAYOUT:
-- Top: slide tag in orange, small, bordered
-- Center: ULTRA-LARGE Japanese headline (80-90px), white with orange accent word
-- Below: body message in gray (#bbbbbb), medium weight, line-by-line stacked
-- Bottom: CTA button, orange background, black text, bold, rounded rectangle
-
-STYLE: Maximum impact, conviction-led, masculine. No softness. No decoration.
-Think: end of a motivational speech. Heavy silence. Lingering message.
-
-CONTENT:
-- Headline: {{核心メッセージ（2行、大見出し）}}
+--- PANEL BOTTOM-RIGHT: 結論・愛の鞭 ---
+Background: black (#000000). Text centered.
+Top: orange bordered tag. Center: ultra-large headline white + orange accent.
+Below: body message in gray (#bbbbbb) stacked lines.
+Bottom: orange CTA button, black text, rounded rect.
+Content:
+- Headline: {{核心メッセージ（2行）}}（orange accent on key word）
 - Body: {{本質}} / {{行動}} / {{未来の姿}}
-- CTA: {{今すぐできる行動喚起（10文字以内）}}🔥
+- CTA: {{行動喚起（10文字以内）}}🔥
 
-IMPORTANT: No real brand logos, no real store signs (7-Eleven, Lawson, FamilyMart, etc.),
-no real product packaging. Use only generic convenience store-style designs
-and fictional product packaging throughout.
+--- GLOBAL STYLE RULES ---
+- Ultra-bold Japanese Gothic font (Noto Sans JP Black or equivalent)
+- High contrast, masculine, SNS-optimized for mobile
+- Numbers large, prices prominent, minimal white space
+- No cute elements, no minimal design, no pastel colors
+- No feminine design elements
+- 4px white separator lines between panels
+
+IMPORTANT: No real brand logos, no real store signs (7-Eleven,
+Lawson, FamilyMart, etc.), no real product packaging.
+Use only generic convenience store-style designs and
+fictional product packaging throughout.
 ```
 
 ---
@@ -130,24 +94,18 @@ and fictional product packaging throughout.
 ## 毎回の出力フォーマット
 
 ```
-## 🖼️ 投稿①【型名】図解プロンプト（4枚）
+## 🖼️ 投稿①【型名】GPT Image 2.0 プロンプト
 
-### 1枚目【問題提起】
-[プロンプト全文]
-
-### 2枚目【科学の現実】
-[プロンプト全文]
-
-### 3枚目【実践方法】
-[プロンプト全文]
-
-### 4枚目【結論・愛の鞭】
-[プロンプト全文]
+[2160×2160px 2×2グリッド プロンプト全文]
 
 ---
 
-## 🖼️ 投稿②【型名】図解プロンプト（4枚）
-...（5投稿分繰り返し）
+## 🖼️ 投稿②【型名】GPT Image 2.0 プロンプト
+
+[プロンプト全文]
+
+---
+（5投稿分繰り返し）
 ```
 
 ---
