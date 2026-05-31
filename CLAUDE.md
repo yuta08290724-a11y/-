@@ -1,44 +1,37 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+このファイルは、このリポジトリで作業するClaude Code（claude.ai/code）へのガイダンスを提供します。
 
-## Project Overview
+## プロジェクト概要
 
-Static single-page website for **Bistro Lumiere**, a fictional French bistro restaurant. The site is in Japanese and has no build system — it is plain HTML, CSS, and JavaScript opened directly in a browser.
+**Bistro Lumiere**（架空のフレンチビストロ）の静的シングルページWebサイト。日本語コンテンツで、ビルドシステムなし。HTML・CSS・JavaScriptをブラウザで直接開くだけで動作します。
 
-## File Structure
+## ファイル構成
 
-- `index.html` — The entire page markup. Sections in order: `header` (nav + hamburger + dark mode toggle), `#home` (hero), `#about`, `#menu`, `#gallery`, `#contact` (reservation form), `footer`.
-- `style.css` — Referenced but not yet created. Must be created to style the page.
-- `script.js` — Referenced but not yet created. Must handle dark mode toggle, hamburger menu, and scroll animations.
+- `index.html` — ページ全体のマークアップ。セクション順: `header`（ナビ・ハンバーガー・ダークモード切替）→ `#home`（ヒーロー）→ `#about` → `#menu` → `#gallery` → `#contact`（予約フォーム）→ `footer`
+- `style.css` — 参照されているが未作成。スタイリングのために作成が必要。
+- `script.js` — 参照されているが未作成。ダークモード・ハンバーガーメニュー・スクロールアニメーションを実装する必要あり。
 
-## Running the Site
+## サイトの起動方法
 
-No build step. Open `index.html` directly in a browser:
-
-```bash
-open index.html          # macOS
-xdg-open index.html      # Linux
-```
-
-Or use a simple local server:
+ビルド不要。`index.html` をブラウザで直接開くか、簡易サーバーを使用:
 
 ```bash
 python3 -m http.server 8080
 ```
 
-## Architecture & Conventions
+## アーキテクチャと規約
 
-**Fonts:** Google Fonts — `Playfair Display` (headings, English display text) and `Noto Sans JP` (Japanese body text).
+**フォント:** Google Fonts — `Playfair Display`（見出し・英語表示）と `Noto Sans JP`（日本語本文）。
 
-**Animations:** Elements use CSS classes `fade-in` and `fade-up`, with staggered timing via `delay-100`, `delay-200`, `delay-300`. JavaScript should add an `is-visible` (or equivalent) class when elements enter the viewport via IntersectionObserver.
+**スクロールアニメーション:** 要素に `fade-in` / `fade-up` クラスを付与し、`delay-100`・`delay-200`・`delay-300` で遅延を制御。JavaScriptでIntersectionObserverを使い、要素がビューポートに入ったタイミングで表示用クラス（`is-visible` 等）を付与する想定。
 
-**Dark mode:** The `#theme-toggle` button toggles dark/light theme. Convention should use a `data-theme` attribute on `<html>` or a `.dark` class on `<body>`.
+**ダークモード:** `#theme-toggle` ボタンで切替。`<html>` の `data-theme` 属性か `<body>` の `.dark` クラスで制御する規約を推奨。
 
-**Layout helpers:** `.container` constrains max-width and centers content. `.grid-2` is a two-column layout used in the About and Contact sections.
+**レイアウト:** `.container` でコンテンツ幅を制限・中央寄せ。`.grid-2` はAboutセクションとContactセクションで使われる2カラムレイアウト。
 
-**Mobile nav:** `.hamburger` button toggles the `.nav-list` visibility on small screens.
+**モバイルナビ:** `.hamburger` ボタンで `.nav-list` の表示を切替。
 
-**Menu cards:** `.menu-card` elements each have an `.menu-icon` (emoji), heading, dish name, `.price`, and `.menu-desc`.
+**メニューカード:** `.menu-card` は `.menu-icon`（絵文字）・見出し・料理名・`.price`・`.menu-desc` で構成。
 
-**Gallery:** `.gallery-item` elements have an `.img-placeholder` div (image not yet provided) and a `.gallery-overlay` with caption text on hover.
+**ギャラリー:** `.gallery-item` は `.img-placeholder`（画像未提供）とホバー時に表示する `.gallery-overlay` キャプションで構成。
