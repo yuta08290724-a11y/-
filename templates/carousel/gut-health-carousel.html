@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<!--
+  図解カルーセルテンプレート｜腸活シリーズ
+  対象：30〜40代サラリーマン男性
+  サイズ：1080x1080px (device_scale: 2 で書き出し)
+  使い方：
+    SLIDE_NUMBER を 1〜4 に変えて html_to_png で書き出す
+    変数 {{TOPIC}}, {{PRICE}}, {{ITEM}} を差し替えて再利用可
+-->
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  /* ===== リセット ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1080px; overflow: hidden; }
+
+  /* ===== カラーパレット ===== */
+  :root {
+    --black:   #000000;
+    --white:   #ffffff;
+    --orange:  #FF6B00;   /* アクセント・CTA */
+    --yellow:  #FFD600;   /* 価格・数字 */
+    --green:   #4CAF50;   /* ポジティブ結果 */
+    --red:     #FF3B30;   /* 警告・チェック */
+    --gray-dk: #111111;   /* カード背景 */
+    --gray-md: #1e1e1e;   /* セカンダリカード */
+    --gray-lt: #aaaaaa;   /* サブテキスト */
+  }
+
+  /* ===== 共通ベース ===== */
+  .slide {
+    width: 1080px; height: 1080px;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    padding: 80px 70px; position: relative;
+    font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+  }
+  .slide-tag {
+    font-size: 22px; font-weight: 700;
+    letter-spacing: 4px;
+    border: 2px solid currentColor;
+    padding: 6px 20px; margin-bottom: 44px;
+    display: inline-block;
+  }
+  .slide-num {
+    position: absolute; bottom: 40px; right: 60px;
+    font-size: 22px; font-weight: 700;
+  }
+  .top-bar {
+    position: absolute; top: 0; left: 0; right: 0; height: 6px;
+  }
+
+  /* ===== SLIDE 1 — 問題提起（黒背景） ===== */
+  .s1 { background: var(--black); color: var(--white); }
+  .s1 .slide-tag { color: var(--orange); }
+  .s1 .top-bar  { background: var(--orange); }
+  .s1 .slide-num { color: #333; }
+
+  .s1 h1 {
+    font-size: 72px; font-weight: 900;
+    line-height: 1.2; text-align: center;
+    margin-bottom: 44px;
+  }
+  .s1 h1 .accent { color: var(--orange); }
+
+  .checklist { width: 100%; }
+  .check-item {
+    display: flex; align-items: center; gap: 20px;
+    font-size: 34px; font-weight: 700;
+    padding: 16px 0; border-bottom: 1px solid #222;
+    color: #ddd;
+  }
+  .check-item .icon { font-size: 28px; color: var(--red); flex-shrink: 0; }
+
+  .s1 .bottom-note {
+    font-size: 28px; font-weight: 900;
+    color: var(--orange); text-align: center;
+    margin-top: 28px; letter-spacing: 1px;
+  }
+
+  /* ===== SLIDE 2 — 科学の現実（白背景） ===== */
+  .s2 { background: var(--white); color: #111; }
+  .s2 .slide-tag { color: var(--orange); }
+  .s2 .top-bar  { background: var(--orange); }
+  .s2 .slide-num { color: #bbb; }
+
+  .s2 h2 {
+    font-size: 44px; font-weight: 900;
+    text-align: center; margin-bottom: 44px; line-height: 1.3;
+  }
+  .flow { display: flex; flex-direction: column; align-items: center; width: 100%; }
+  .flow-box {
+    width: 720px; padding: 20px 28px;
+    border-radius: 8px; text-align: center; margin: 0;
+  }
+  .flow-box .f-label { font-size: 18px; color: #888; font-weight: 700; margin-bottom: 5px; }
+  .flow-box .f-main  { font-size: 32px; font-weight: 900; line-height: 1.4; }
+  .flow-box.food     { background: #FFF3E0; border: 3px solid var(--orange); }
+  .flow-box.food .f-main { color: var(--orange); }
+  .flow-box.mech     { background: #F3F3F3; border: 3px solid #888; }
+  .flow-box.mech .f-main { color: #333; }
+  .flow-box.result   { background: #E8F5E9; border: 3px solid var(--green); }
+  .flow-box.result .f-main { color: #2E7D32; }
+  .flow-arrow { font-size: 36px; color: #ccc; padding: 6px 0; line-height: 1; }
+  .s2 .note { font-size: 24px; font-weight: 700; color: #666; margin-top: 28px; text-align: center; }
+
+  /* ===== SLIDE 3 — 実践方法（黒背景） ===== */
+  .s3 { background: var(--gray-dk); color: var(--white); }
+  .s3 .slide-tag { color: var(--yellow); }
+  .s3 .top-bar  { background: var(--yellow); }
+  .s3 .slide-num { color: #444; }
+
+  .s3 h2 {
+    font-size: 44px; font-weight: 900;
+    text-align: center; margin-bottom: 36px; line-height: 1.3;
+  }
+  .steps { width: 100%; display: flex; flex-direction: column; gap: 18px; margin-bottom: 32px; }
+  .step {
+    display: flex; align-items: center; gap: 24px;
+    background: var(--gray-md); border-radius: 12px; padding: 22px 28px;
+  }
+  .step-num {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: var(--yellow); color: #000;
+    font-size: 30px; font-weight: 900;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .step-body { flex: 1; }
+  .step-body .action { font-size: 32px; font-weight: 900; }
+  .step-body .detail { font-size: 22px; font-weight: 700; color: var(--gray-lt); margin-top: 3px; }
+  .step-badge {
+    font-size: 32px; font-weight: 900;
+    color: var(--yellow); flex-shrink: 0;
+  }
+  .total-bar {
+    background: var(--yellow); color: #000;
+    width: 100%; padding: 18px;
+    border-radius: 10px; text-align: center;
+    font-size: 34px; font-weight: 900;
+  }
+
+  /* ===== SLIDE 4 — 結論・CTA（黒背景） ===== */
+  .s4 { background: var(--black); color: var(--white); text-align: center; }
+  .s4 .slide-tag { color: var(--orange); }
+  .s4 .top-bar  { background: var(--orange); }
+  .s4 .slide-num { color: #333; }
+
+  .s4 .headline {
+    font-size: 80px; font-weight: 900;
+    line-height: 1.2; margin-bottom: 36px;
+  }
+  .s4 .headline .accent { color: var(--orange); }
+  .s4 .body-text {
+    font-size: 32px; font-weight: 700;
+    color: #bbbbbb; line-height: 1.9; margin-bottom: 48px;
+  }
+  .s4 .body-text .hl { color: var(--white); font-weight: 900; }
+  .cta-btn {
+    background: var(--orange); color: #000;
+    font-size: 40px; font-weight: 900;
+    padding: 24px 60px; border-radius: 8px;
+    letter-spacing: 2px; display: inline-block;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     SLIDE 1 / 4  問題提起
+     差し替えポイント:
+       h1 テキスト / チェックリスト4項目 / bottom-note
+     ============================================================ -->
+<!-- <div class="slide s1">
+  <div class="top-bar"></div>
+  <div class="slide-tag">1 / 4　問題提起</div>
+  <h1>「よく寝たのに<br><span class="accent">しんどい」</span><br>それ、腸のせいや。</h1>
+  <div class="checklist">
+    <div class="check-item"><span class="icon">✗</span>朝起きるのが重い</div>
+    <div class="check-item"><span class="icon">✗</span>疲れが翌日に残る</div>
+    <div class="check-item"><span class="icon">✗</span>集中力が続かない</div>
+    <div class="check-item"><span class="icon">✗</span>なんとなく気分が重い</div>
+  </div>
+  <div class="bottom-note">→ 全部、腸が原因かもしれへん</div>
+  <div class="slide-num">1 / 4</div>
+</div> -->
+
+
+<!-- ============================================================
+     SLIDE 2 / 4  科学の現実
+     差し替えポイント:
+       h2 / flow-box の food・mech×2・result テキスト / note
+     ============================================================ -->
+<!-- <div class="slide s2">
+  <div class="top-bar"></div>
+  <div class="slide-tag">2 / 4　科学の現実</div>
+  <h2>腸が修復ホルモンを<br>止めてた</h2>
+  <div class="flow">
+    <div class="flow-box food">
+      <div class="f-label">FOOD</div>
+      <div class="f-main">もずく酢（¥58）</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-box mech">
+      <div class="f-label">MECHANISM</div>
+      <div class="f-main">水溶性食物繊維が善玉菌を増やす<br>腸内環境が整う</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-box mech">
+      <div class="f-label">MECHANISM</div>
+      <div class="f-main">成長ホルモン・メラトニンが<br>正常に分泌される</div>
+    </div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-box result">
+      <div class="f-label">RESULT</div>
+      <div class="f-main">睡眠の修復力が上がる<br>朝スッキリ起きられる</div>
+    </div>
+  </div>
+  <div class="note">腸を整えるだけで睡眠が変わる</div>
+  <div class="slide-num">2 / 4</div>
+</div> -->
+
+
+<!-- ============================================================
+     SLIDE 3 / 4  実践方法
+     差し替えポイント:
+       h2 / 各 step の action・detail・badge / total-bar
+     ============================================================ -->
+<!-- <div class="slide s3">
+  <div class="top-bar"></div>
+  <div class="slide-tag">3 / 4　実践方法</div>
+  <h2>今夜から始める<br>3ステップ</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <div class="action">コンビニでもずく酢を買う</div>
+        <div class="detail">水溶性食物繊維で善玉菌のエサ</div>
+      </div>
+      <div class="step-badge">¥58</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <div class="action">夜ご飯の後に食べる</div>
+        <div class="detail">調理ゼロ・所要時間3分</div>
+      </div>
+      <div class="step-badge">0分</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <div class="action">3日続ける</div>
+        <div class="detail">朝の目覚めの変化を感じろ</div>
+      </div>
+      <div class="step-badge">最短3日</div>
+    </div>
+  </div>
+  <div class="total-bar">¥58 / 調理ゼロ / 今夜から</div>
+  <div class="slide-num">3 / 4</div>
+</div> -->
+
+
+<!-- ============================================================
+     SLIDE 4 / 4  結論・CTA  ← 書き出し中はここだけコメント解除
+     差し替えポイント:
+       headline / body-text / cta-btn テキスト
+     ============================================================ -->
+<div class="slide s4">
+  <div class="top-bar"></div>
+  <div class="slide-tag">4 / 4　結論・行動喚起</div>
+  <div class="headline">腸が変われば、<br><span class="accent">朝が変わる。</span></div>
+  <div class="body-text">
+    <span class="hl">¥58のもずく酢</span>で<br>
+    「よく寝たのにしんどい」を<br>
+    終わらせろ。<br>
+    今夜から、遅くない。
+  </div>
+  <div class="cta-btn">今夜、買って帰れ🔥</div>
+  <div class="slide-num">4 / 4</div>
+</div>
+
+</body>
+</html>
