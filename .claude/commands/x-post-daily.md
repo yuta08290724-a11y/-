@@ -114,12 +114,23 @@ mcp__cd6dedb6（Google Drive）を使い、以下に保存：
 
 `generate_image` を `provider: gpt-image-2 / quality: high / resolution: 2K / aspect_ratio: 1:1 / background: true` で呼び出し、以下の構成で生成すること。
 
+> **【絶対禁止ルール】毎回必ずプロンプトに含めること**
+> - 実在する企業ロゴ・ブランドロゴ 一切禁止
+> - 実在する店舗看板・チェーン店名 一切禁止
+> - 実在する商品パッケージ・商標 一切禁止
+> - コンビニ風の架空デザイン・汎用商品パッケージのみ使用
+
 ```
 Single square image divided into a 2x2 grid with thin white dividing lines.
 Masculine, high-contrast, cinematic SNS infographic.
 Japanese text must be pixel-perfect.
-No real brand logos, store signs, or product packaging.
-Use generic convenience-store-style packaging and fictional interiors only.
+
+STRICT RULES — APPLY TO EVERY PANEL WITHOUT EXCEPTION:
+- NO real company logos or brand marks of any kind
+- NO real store signage, chain store names, or recognizable retail branding
+- NO real product packaging or trademarks
+- USE ONLY generic convenience-store-style fictional design
+- USE ONLY generic unlabeled product packaging
 
 PANEL 1 (top-left) — 問題提起:
 [今日の投稿テーマに合わせた「読者が抱えているあるある問題」を描写]
