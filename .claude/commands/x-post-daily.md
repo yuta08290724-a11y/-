@@ -108,12 +108,58 @@ mcp__cd6dedb6（Google Drive）を使い、以下に保存：
 
 ### Step 5：笹川（図解生成）（A or C を選択した場合）
 
-推奨1位の投稿を図解化してください。
+推奨1位の投稿を **4パネル2×2カルーセル形式** で図解化してください。
 
-1. `render_html_animation` または `generate_image` で図解を生成
-   - スタイル：シンプル・縦長（X投稿向け）・読みやすいフォント
-   - 内容：投稿の要点を3〜5項目に箇条書き
-   - ブランドカラー：温かみのあるオレンジ or 白背景
+#### 必須フォーマット（毎回固定）
+
+`generate_image` を `provider: gpt-image-2 / quality: high / resolution: 2K / aspect_ratio: 1:1 / background: true` で呼び出し、以下の構成で生成すること。
+
+```
+Single square image divided into a 2x2 grid with thin white dividing lines.
+Masculine, high-contrast, cinematic SNS infographic.
+Japanese text must be pixel-perfect.
+No real brand logos, store signs, or product packaging.
+Use generic convenience-store-style packaging and fictional interiors only.
+
+PANEL 1 (top-left) — 問題提起:
+[今日の投稿テーマに合わせた「読者が抱えているあるある問題」を描写]
+Dark moody cinematic background with dark overlay.
+Yellow highlight label at top: 問題を一言で表すキャッチコピー
+Huge white bold Japanese text: 問題の核心（逆説・否定形が効果的）
+Orange checkmark checklist: 読者あるある4項目
+Bottom dark card with orange border: 解決の予告一行
+
+PANEL 2 (top-right) — 解説・科学:
+Clean white or very light background.
+Dark navy bold title: なぜそうなるのかの理由
+Flow diagram or 4-column layout with generic food/item illustrations.
+Each item: [素材/行動] → 効果 → 結果
+All converge → bold conclusion text
+Right sidebar gray box: キーメッセージ / 赤字サブテキスト
+
+PANEL 3 (bottom-left) — 実践リスト:
+Dark green or dark themed header with white bold title.
+Subtitle: 金額・手間・時間などの具体的メリット
+4 white cards with colored left border:
+各カード: [イラスト] 品名 / 説明テキスト / orange 価格や数値
+Footer strip: 合計・時間などの数字を黄色大文字で
+Bottom colored banner: 行動を促すキャッチコピー
+
+PANEL 4 (bottom-right) — 結論・愛の鞭:
+Dark cinematic photo with determined human figure, heavy dark overlay.
+Top small white: トッティーの肩書き一言「厨房15年のシェフが断言する」
+Center: white / yellow giant / white の3段構成で核心メッセージ
+Middle semi-transparent dark card: 選択を迫る問いかけ → orange bold 決断ワード
+Bottom very large bold white: 命令形・断言形の3行メッセージ
+Bottom checklist: 得られる変化4項目
+
+STYLE: Masculine. High contrast. Cinematic. Bold heavy typography.
+No cute or feminine elements. Smartphone-readable.
+Thin bright white 4px dividing lines between all 4 panels.
+```
+
+生成後は `task_status` でポーリングして完了を確認すること。
+
 2. 保存先：Drive の同フォルダ内 `X投稿図解$CURRENT_DATE.png`
 
 完了後「本日の準備完了です！」と報告。
