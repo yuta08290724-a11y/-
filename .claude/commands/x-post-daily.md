@@ -184,72 +184,59 @@ mcp__cd6dedb6（Google Drive）を使い、以下に保存：
 - ファイル名：`x-posts-$CURRENT_DATE.md`
 - 内容：5投稿の全文＋採点結果
 
-### Step 5：笹川（図解生成）（A or C を選択した場合）
+### Step 5：笹川（図解プロンプト生成 → 画像生成）（A or C を選択した場合）
 
-**採点スコアが最も高い1投稿だけ** を4パネル2×2カルーセル形式で図解化してください。
-（複数投稿の図解は作らない。毎日1本に厳選すること。）
+**採点スコアが最も高い1投稿だけ** を対象にする。
+（複数不可。毎日1本に厳選すること。）
 
-#### 必須フォーマット（毎回固定）
+#### 笹川の役割
 
-`generate_image` を `provider: gpt-image-2 / quality: high / resolution: 2K / aspect_ratio: 1:1 / background: true` で呼び出し、以下の構成で生成すること。
+笹川は **GPT Image 2.0 専用プロンプトエンジニア** である。
+投稿内容を読み込み、その内容に最適化した4パネルの図解プロンプトをゼロから組み上げてから `generate_image` を呼び出す。
+テンプレートをそのまま使わない。毎回、その投稿のテーマ・食材・価格・メッセージに合わせてカスタム生成すること。
 
-> **【絶対禁止ルール】毎回必ずプロンプトに含めること**
-> - 実在する企業ロゴ・ブランドロゴ 一切禁止
-> - 実在する店舗看板・チェーン店名 一切禁止
-> - 実在する商品パッケージ・商標 一切禁止
-> - コンビニ風の架空デザイン・汎用商品パッケージのみ使用
+#### プロンプト構成ルール
+
+以下の構造に従い、今日の投稿内容を反映したプロンプトを組み立てること。
 
 ```
-Single square image divided into a 2x2 grid with thin white dividing lines.
-Masculine, high-contrast, cinematic SNS infographic.
-Japanese text must be pixel-perfect.
+Create a single 2160x2160px image divided into a 2x2 grid of 4 panels (each 1080x1080px), separated by 4px white lines. Japanese SNS infographic for busy men aged 30-40. Theme:「[今日の投稿テーマを一言で]」
 
-STRICT RULES — APPLY TO EVERY PANEL WITHOUT EXCEPTION:
-- NO real company logos or brand marks of any kind
-- NO real store signage, chain store names, or recognizable retail branding
-- NO real product packaging or trademarks
-- USE ONLY generic convenience-store-style fictional design
-- USE ONLY generic unlabeled product packaging
+PANEL TOP-LEFT【問題提起】 Dark bg #1a1a1a.
+Top: [読者が共感するキャッチコピー] white small.
+Center: ultra-bold yellow [問題の核心・逆説・否定形] giant text.
+Checklist: ✔ [あるある1] ✔ [あるある2] ✔ [あるある3] ✔ [あるある4].
+Bottom orange:「→ [解決の予告1行]」
 
-PANEL 1 (top-left) — 問題提起:
-[今日の投稿テーマに合わせた「読者が抱えているあるある問題」を描写]
-Dark moody cinematic background with dark overlay.
-Yellow highlight label at top: 問題を一言で表すキャッチコピー
-Huge white bold Japanese text: 問題の核心（逆説・否定形が効果的）
-Orange checkmark checklist: 読者あるある4項目
-Bottom dark card with orange border: 解決の予告一行
+PANEL TOP-RIGHT【科学の現実 or 理由】 White bg #ffffff.
+Title orange small [なぜそうなるか・根拠タイトル].
+Vertical flow with ↓ arrows:
+[orange border][食材/行動（価格）] ↓ [gray][作用・メカニズム] ↓ [gray][体・心への効果] ↓ [green][最終的な変化].
+Right side note dark gray small: [キーメッセージ1行]
 
-PANEL 2 (top-right) — 解説・科学:
-Clean white or very light background.
-Dark navy bold title: なぜそうなるのかの理由
-Flow diagram or 4-column layout with generic food/item illustrations.
-Each item: [素材/行動] → 効果 → 結果
-All converge → bold conclusion text
-Right sidebar gray box: キーメッセージ / 赤字サブテキスト
+PANEL BOTTOM-LEFT【実践方法】 Dark bg #111111.
+Title yellow [行動を促すタイトル].
+3 STEP cards (dark gray #1e1e1e, rounded, yellow circle number):
+STEP1 [食材名] [価格] [効果一言] /
+STEP2 [食材名] [価格] [効果一言] /
+STEP3 [食材名] [価格] [効果一言].
+Bottom bar yellow bg black text bold:「合計[合計金額] / [所要時間] / [入手場所]」
 
-PANEL 3 (bottom-left) — 実践リスト:
-Dark green or dark themed header with white bold title.
-Subtitle: 金額・手間・時間などの具体的メリット
-4 white cards with colored left border:
-各カード: [イラスト] 品名 / 説明テキスト / orange 価格や数値
-Footer strip: 合計・時間などの数字を黄色大文字で
-Bottom colored banner: 行動を促すキャッチコピー
+PANEL BOTTOM-RIGHT【結論・愛の鞭】 Black bg #000000. Centered.
+Top orange bordered tag「結論」.
+Ultra-large headline white: [結論1行前半] orange accent: [結論1行後半].
+Body gray: [理由または行動の重要性を3行で].
+CTA button orange bg black text:「[命令形の行動促進メッセージ🔥]」
 
-PANEL 4 (bottom-right) — 結論・愛の鞭:
-Dark cinematic photo with determined human figure, heavy dark overlay.
-Top small white: トッティーの肩書き一言「厨房15年のシェフが断言する」
-Center: white / yellow giant / white の3段構成で核心メッセージ
-Middle semi-transparent dark card: 選択を迫る問いかけ → orange bold 決断ワード
-Bottom very large bold white: 命令形・断言形の3行メッセージ
-Bottom checklist: 得られる変化4項目
-
-STYLE: Masculine. High contrast. Cinematic. Bold heavy typography.
-No cute or feminine elements. Smartphone-readable.
-Thin bright white 4px dividing lines between all 4 panels.
+GLOBAL: Ultra-bold Noto Sans JP Black. High contrast. Masculine. No cute/minimal/pastel. Numbers large. Mobile-optimized.
+IMPORTANT: No real brand logos, no real store signs, no real product packaging. Use only generic convenience store-style designs and fictional product packaging throughout.
 ```
 
-生成後は `task_status` でポーリングして完了を確認すること。
+#### 生成手順
 
-2. 保存先：Drive の同フォルダ内 `X投稿図解$CURRENT_DATE.png`
+1. 上記ルールに従い、今日の投稿内容を埋め込んだプロンプトを組み立てる
+2. `generate_image` を `provider: gpt-image-2 / quality: high / resolution: 2K / aspect_ratio: 1:1 / background: true` で呼び出す
+3. `task_status` でポーリングして完了を確認する
+4. 保存先：Drive の同フォルダ内 `X投稿図解$CURRENT_DATE.png`
 
 完了後「本日の準備完了です！」と報告。
