@@ -14,7 +14,7 @@
 - **ターゲット**：仕事・人間関係・生活で消耗している人
 - **スタイル**：関西弁・熱血・直球・愛の鞭・でもあったかい
 - **テーマ軸**：食 × リカバリー / 料理 × 心の回復 / 一皿 × 立ち直り
-- **食材縛り**：コンビニ・スーパーで手に入るものだけ。高級食材・特殊調味料は使わない（価格制限なし）
+- **食材縛り**：コンビニ・スーパーで手に入るものだけ。高級食材・特殊調味料は使わない。価格制限なし、ただし安く済むなら安く済ませること
 - **NG**：料理科学・食材トリビア・テクニック単発（リカバリーに繋がらない投稿は作らない）
 
 **投稿を生成するたびに必ず問え：「これを読んだしんどい人が、少し前向きになれるか？」**
@@ -234,9 +234,48 @@ IMPORTANT: No real brand logos, no real store signs, no real product packaging. 
 
 #### 生成手順
 
-1. 上記ルールに従い、今日の投稿内容を埋め込んだプロンプトを組み立てる
+**【画像A】最高スコア投稿の図解（No.1〜4から1位）**
+1. 上記ルールに従い、今日の投稿内容を埋め込んだ4パネル図解プロンプトを組み立てる
 2. `generate_image` を `provider: gpt-image-2 / quality: high / resolution: 2K / aspect_ratio: 1:1 / background: true` で呼び出す
 3. `task_status` でポーリングして完了を確認する
 4. 保存先：Drive の同フォルダ内 `X投稿図解$CURRENT_DATE.png`
+
+**【画像B】No.5 リカバリーレシピ画像**
+
+No.5のレシピ内容をもとに、以下の構成でレシピ画像プロンプトを組み立てて生成すること。
+
+```
+Create a single 2160x2160px recipe card image. Japanese SNS recipe post for busy men aged 30-40.
+Recipe: 「[料理名]」— [キャッチコピー1行]
+
+LAYOUT: Dark bg #111111. Single panel. Centered vertical layout.
+
+TOP SECTION:
+Large yellow bold title:「[料理名]」
+Subtitle white small:「[リカバリーメッセージ1行]」
+Icon row: ⏱[X分] 🔌[使用器具] 🔪包丁なし
+
+MIDDLE-LEFT: Ingredients block, dark card #1e1e1e rounded.
+Title orange small「材料（1人分）」
+List white:
+・[食材名] [分量] — [効果一言]
+・[食材名] [分量] — [効果一言]
+・[食材名] [分量] — [効果一言]
+
+MIDDLE-RIGHT: Generic food illustration — cinematic overhead shot of the finished dish on a dark plate/bowl. No brand logos. Warm orange light.
+
+BOTTOM: Steps block, 3 cards side by side, dark gray #1e1e1e.
+STEP① [手順] / STEP② [手順] / STEP③ [手順]
+
+FOOTER: Orange bg strip, black bold text:「[今夜のCTA一行🔥]」
+
+GLOBAL: Ultra-bold Noto Sans JP Black. High contrast. Masculine. No cute/pastel.
+IMPORTANT: No real brand logos, no real store signs, no real product packaging.
+```
+
+1. 上記ルールに従い、No.5のレシピ内容を埋め込んだプロンプトを組み立てる
+2. `generate_image` を `provider: gpt-image-2 / quality: high / resolution: 2K / aspect_ratio: 1:1 / background: true` で呼び出す（画像Aと並列実行可）
+3. `task_status` でポーリングして完了を確認する
+4. 保存先：Drive の同フォルダ内 `X投稿レシピ画像$CURRENT_DATE.png`
 
 完了後「本日の準備完了です！」と報告。
