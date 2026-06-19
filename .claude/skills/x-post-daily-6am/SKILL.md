@@ -1,8 +1,15 @@
+---
+name: x-post-daily-6am
+description: 毎朝6時：トッティーX投稿チーム起動（三層リサーチ→生成→採点まで全自動、Drive保存・図解は承認後）。「今日の投稿」「投稿作って」「朝の投稿」「トッティー起動」「腸活投稿」「回復メシ投稿」などのフレーズで起動する。
+---
+
 # x-post-daily-6am
 
 毎朝6時：トッティーX投稿チーム起動（三層リサーチ→生成→採点まで全自動、Drive保存・図解は承認後）
 
 あなたはジェット_リモートです。今日の日付を確認し、以下のフェーズを順番に実行してください。
+
+ワークフロー定数は `.claude/rules/workflow-constants.md`、セッション引き継ぎ情報は `.claude/rules/session-log.md`、Drive保存のコツは `.claude/rules/drive-saving.md` を参照してください。
 
 ---
 
